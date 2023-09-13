@@ -4,6 +4,8 @@
 	import TodoList from './lib/TodoList.svelte';
 	import { v4 as uuid } from 'uuid';
 
+	let todoList;
+
 	let todos = [
 		{
 			id: uuid(),
@@ -28,12 +30,10 @@
 	];
 
 	function handleAddTodo(event) {
-		// event.preventDefault()
-		const { detail } = event;
+		event.preventDefault();
 
-		if (!detail.title) {
-			return;
-		}
+		// setTimeout(() => {
+		const { detail } = event;
 
 		todos = [
 			...todos,
@@ -43,6 +43,8 @@
 				completed: false
 			}
 		];
+		todoList.clearInput();
+		// }, 1000);
 	}
 
 	function handleRemoveTodo(event) {
@@ -68,12 +70,17 @@
 	}
 </script>
 
-<TodoList
-	{todos}
-	on:addtodo={handleAddTodo}
-	on:removetodo={handleRemoveTodo}
-	on:toggletodo={handleToggleTodo}
-/>
+<div style:max-width="200px">
+	<TodoList
+		{todos}
+		bind:this={todoList}
+		on:addtodo={handleAddTodo}
+		on:removetodo={handleRemoveTodo}
+		on:toggletodo={handleToggleTodo}
+	/>
+</div>
+
+<button on:click={() => todoList.focusInput()}>Focus Input</button>
 
 <style>
 </style>
