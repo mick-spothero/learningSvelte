@@ -26,6 +26,11 @@
 			id: uuid(),
 			title: 'Todo 4',
 			completed: false
+		},
+		{
+			id: uuid(),
+			title: 'A long long long long long long long long long long long long long long long long long todo',
+			completed: false
 		}
 	];
 
@@ -70,7 +75,7 @@
 	}
 </script>
 
-<div style:max-width="200px">
+<div style:max-width="400px">
 	<TodoList
 		{todos}
 		bind:this={todoList}
@@ -79,8 +84,6 @@
 		on:toggletodo={handleToggleTodo}
 	/>
 </div>
-
-<button on:click={() => todoList.focusInput()}>Focus Input</button>
 
 <style>
 </style>
